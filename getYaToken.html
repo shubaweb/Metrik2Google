@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Yandex Token</title>
+</head>
+<body>
+<script type="text/javascript">
+    function ready() {
+        var token;
+        if (token = /access_token=([-0-9a-zA-Z_]+)/.exec(document.location.hash)[1]) { //достаем token яндекса из URL, заодно проверяем все ли в порядке
+            //если да
+            window.opener.document.getElementById('yaToken').value = token; //пишем токен в инпут #yaToken
+            window.opener.document.getElementById('yaAuthButton').className = "btn btn-success"; //красим кнопку #yaButton в зеленый
+            window.close(); //закрываем popup
+        } else {
+            window.opener.document.getElementById('yaAuthButton').className = "btn btn-warning"; //красим кнопку #yaButton в красный
+            window.opener.alert('Токен не получен'); //выводим предупреждение что token не получен
+            window.close(); //закрываем popup
+        }
+    }
+    document.addEventListener("DOMContentLoaded", ready); //добавляем обработчик загрузки DOM
+</script>
+</body>
+</html>
